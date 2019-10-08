@@ -7,7 +7,14 @@ const city = 'montreal';
 const maxPrice = '350';
 
 scraper.scrapeFacebook(city, query, maxPrice).then(fbAds => {
-  db.db.get('fbAds')
-    .push(fbAds)
-    .write()
+  let duplicate = 0
+  fbAds.map(ad => {
+    if (db.db.get('fbAds').find({ url: ad.url }).value()) {
+      duplicate++
+    } else {
+      db.db.get('fbAds').push(ad).write()
+    }
+  })
+
+  console.log("duplicate: " + duplicate)
 })
