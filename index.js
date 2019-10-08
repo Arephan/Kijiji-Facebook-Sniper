@@ -1,4 +1,4 @@
-const scraper = require('./scraper.js')
+const scraper = require('./facebookScraper.js')
 const db = require('./db.js')
 
 // config
@@ -17,5 +17,5 @@ scraper.scrapeFacebook(city, query, maxPrice).then(fbAds => {
   })
 
   db.db.set('lastUpdated', new Date().toUTCString()).write()
-  db.db.set('duplicate', duplicate).write()
+  db.db.set('fbDuplicate', duplicate).write()
 })
