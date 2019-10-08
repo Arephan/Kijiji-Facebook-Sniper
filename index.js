@@ -16,5 +16,7 @@ scraper.scrapeFacebook(city, query, maxPrice).then(fbAds => {
     }
   })
 
+  db.db.set('lastUpdated', new Date().toUTCString()).write()
+
   console.log("duplicate: " + duplicate)
 })

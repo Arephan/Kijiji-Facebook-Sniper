@@ -5,7 +5,7 @@ const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ fbAds: []})
+db.defaults({ fbAds: [], lastUpdated: 0})
   .write()
 
 module.exports.db = db
