@@ -35,7 +35,7 @@ async function scrapeFacebook(city, query, maxPrice) {
   // @TODO: set up polling
   // @TODO: generate email
 
-  const items = await prepareItems(titles, prices, urls);
+  const items = await prepareItems(titles, prices, urls, "facebook", new Date().toUTCString());
   await browser.close();
   return items
 }
@@ -59,14 +59,16 @@ async function autoScroll(page) {
   });
 }
 
-async function prepareItems(titles, prices, urls) {
+async function prepareItems(titles, prices, urls, source, timestamp) {
   let items = [];
 
   for (let i = 0; i < titles.length; i++) {
     let item = {
       title: titles[i],
       price: prices[i],
-      url: urls[i]
+      url: urls[i],
+      source: source,
+      timestamp: timestamp
     };
 
     items.push(item);

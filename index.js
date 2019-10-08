@@ -9,14 +9,13 @@ const maxPrice = '350';
 scraper.scrapeFacebook(city, query, maxPrice).then(fbAds => {
   let duplicate = 0
   fbAds.map(ad => {
-    if (db.db.get('fbAds').find({ url: ad.url }).value()) {
+    if (db.db.get('ads').find({ url: ad.url }).value()) {
       duplicate++
     } else {
-      db.db.get('fbAds').push(ad).write()
+      db.db.get('ads').push(ad).write()
     }
   })
 
   db.db.set('lastUpdated', new Date().toUTCString()).write()
-
-  console.log("duplicate: " + duplicate)
+  db.db.set('duplicate', duplicate).write()
 })
