@@ -1,12 +1,14 @@
 const puppeteer = require('puppeteer');
 
 async function scrapeFacebook(city, query, maxPrice) {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
   await page.goto(
-    `https://mobile.facebook.com/marketplace/${city}/search/?query=${query}&maxPrice=${maxPrice}`
+    `https://mobile.facebook.com/marketplace/${city}/search/?query=${query}&maxPrice=${maxPrice}`,
+    { waitUntil: 'domcontentloaded' }
   );
   await autoScroll(page);
+  
 
   let titles = await page.evaluate(() =>
     Array.from(
