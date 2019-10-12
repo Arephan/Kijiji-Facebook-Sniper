@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 async function scrapeFacebook(city, query, maxPrice) {
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(
     `https://mobile.facebook.com/marketplace/${city}/search/?query=${query}&maxPrice=${maxPrice}`,
@@ -78,5 +78,6 @@ async function prepareItems(titles, prices, urls, source, timestamp) {
 
   return items;
 }
+
 
 module.exports.scrapeFacebook = scrapeFacebook
